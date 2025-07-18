@@ -1,0 +1,666 @@
+/* Color Palette & Typography Variables */
+:root {
+    --primary-bg: #0F1A2D; /* Deep dark blue from logo */
+    --secondary-bg: #1A273D; /* Slightly lighter dark blue for cards/sections */
+    --accent-color: #2DD3C7; /* Vibrant teal/light blue from logo */
+    --text-color-light: #E0E7FF; /* Soft off-white for main text */
+    --text-color-dark: #AAB2C0; /* Muted text for secondary info */
+    --button-hover-bg: #26B3A9; /* Darker teal for button hover */
+    --border-color: rgba(45, 211, 199, 0.3); /* Subtle teal border */
+
+    --font-heading: 'Montserrat', sans-serif;
+    --font-body: 'Roboto', sans-serif;
+}
+
+/* Base Styles */
+body {
+    font-family: var(--font-body);
+    margin: 0;
+    padding: 0;
+    background: var(--primary-bg);
+    color: var(--text-color-light);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Global Container for Content Width */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Headings */
+h1, h2, h3 {
+    font-family: var(--font-heading);
+    color: var(--accent-color);
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+h1 { font-size: 3.5rem; margin-bottom: 25px; }
+h2 { font-size: 2.8rem; margin-bottom: 40px; position: relative; display: inline-block; }
+h3 { font-size: 1.8rem; margin-bottom: 15px; }
+
+/* Section Heading Underline */
+h2::after {
+    content: '';
+    display: block;
+    width: 90px;
+    height: 4px;
+    background: var(--accent-color);
+    margin: 15px auto 0;
+    border-radius: 2px;
+}
+
+/* Anchor Links (Smooth Scroll) */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Header */
+header {
+    background: var(--secondary-bg);
+    padding: 15px 0;
+    border-bottom: 2px solid var(--border-color);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    position: sticky; /* Make header sticky */
+    top: 0;
+    z-index: 1000; /* Ensure it's above other content */
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; /* Allows wrapping on smaller screens */
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    outline: none; /* Remove default focus outline */
+}
+.logo-link:focus-visible { /* Custom focus for accessibility */
+    box-shadow: 0 0 0 3px var(--accent-color);
+}
+
+.header-logo {
+    width: 180px; /* Adjust based on your logo's dimensions */
+    height: auto;
+    display: block;
+}
+
+.main-nav .nav-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.main-nav .nav-list li {
+    margin-left: 30px;
+}
+
+.main-nav .nav-list a {
+    color: var(--text-color-light);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 8px 0;
+    transition: color 0.3s ease, border-bottom 0.3s ease;
+    position: relative;
+    outline: none; /* Remove default focus outline */
+}
+.main-nav .nav-list a:focus-visible { /* Custom focus for accessibility */
+    box-shadow: 0 0 0 2px var(--accent-color);
+    border-radius: 3px;
+}
+
+.main-nav .nav-list a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 2px;
+    background-color: var(--accent-color);
+    transition: width 0.3s ease;
+}
+
+.main-nav .nav-list a:hover::after,
+.main-nav .nav-list a.active::after { /* Active link style if implemented */
+    width: 100%;
+}
+
+.main-nav .nav-list a:hover {
+    color: var(--accent-color);
+}
+
+/* Hamburger Menu */
+.hamburger {
+    display: none; /* Hidden on desktop */
+    background: none;
+    border: none;
+    color: var(--accent-color);
+    font-size: 1.8rem;
+    cursor: pointer;
+    padding: 5px 10px;
+    outline: none;
+}
+.hamburger:focus-visible {
+    box-shadow: 0 0 0 3px var(--accent-color);
+    border-radius: 5px;
+}
+
+/* Hero Section */
+.hero {
+    padding: 120px 20px;
+    text-align: center;
+    background: linear-gradient(rgba(15, 26, 45, 0.85), rgba(15, 26, 45, 0.85)), url('abstract-crypto-bg.jpg') no-repeat center center/cover; /* Placeholder for new banner */
+    /* If you don't have an image, use this pure gradient: */
+    /* background: linear-gradient(135deg, var(--primary-bg) 0%, #152540 100%); */
+    color: var(--text-color-light);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero p {
+    font-size: 1.3rem;
+    max-width: 800px;
+    margin: 0 auto 40px;
+    font-weight: 300;
+    color: var(--text-color-dark);
+}
+
+/* General Button Style */
+.button {
+    display: inline-block;
+    padding: 15px 35px;
+    border-radius: 50px; /* Pill shape */
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.05rem;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    border: none;
+    text-align: center;
+    outline: none; /* Remove default focus outline */
+}
+.button:focus-visible {
+    box-shadow: 0 0 0 4px var(--text-color-light), 0 0 0 8px var(--accent-color);
+}
+
+.primary-button {
+    background: var(--accent-color);
+    color: var(--primary-bg);
+    box-shadow: 0 8px 20px rgba(45, 211, 199, 0.3);
+}
+
+.primary-button:hover {
+    background-color: var(--button-hover-bg);
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(45, 211, 199, 0.4);
+}
+
+/* Section Padding */
+section {
+    padding: 80px 20px;
+    text-align: center;
+}
+
+/* About Section */
+#about p {
+    text-align: center;
+    max-width: 900px;
+    margin: 20px auto;
+    font-size: 1.1rem;
+    color: var(--text-color-dark);
+}
+
+/* Services Section */
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.service-card {
+    background: var(--secondary-bg);
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    border: 1px solid transparent; /* For hover effect */
+    text-align: center; /* Center content within card */
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    border-color: var(--accent-color);
+}
+
+.service-card .icon {
+    font-size: 3.5rem;
+    color: var(--accent-color);
+    margin-bottom: 20px;
+    transition: transform 0.3s ease;
+}
+
+.service-card:hover .icon {
+    transform: scale(1.1);
+}
+
+.service-card p {
+    color: var(--text-color-dark);
+}
+
+/* Testimonials Section */
+.testimonial-carousel {
+    position: relative;
+    max-width: 800px;
+    margin: 50px auto 0;
+    overflow: hidden;
+    padding: 0 50px; /* Space for buttons */
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.testimonial-slide {
+    flex: 0 0 100%; /* Each slide takes full width */
+    max-width: 100%;
+    background: var(--secondary-bg);
+    padding: 35px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
+    text-align: center;
+    box-sizing: border-box; /* Include padding in width calculation */
+}
+
+.testimonial-slide p {
+    font-style: italic;
+    font-size: 1.15rem;
+    margin-bottom: 30px;
+    color: var(--text-color-light);
+}
+
+.testimonial-slide video {
+    width: 100%;
+    max-width: 600px; /* Limit video width */
+    height: auto;
+    border-radius: 10px;
+    margin: 0 auto;
+    display: block;
+    box-shadow: 0 0 15px rgba(45, 211, 199, 0.5);
+    border: 2px solid var(--accent-color);
+    background-color: #000; /* Dark background for video area before load */
+}
+
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--accent-color);
+    color: var(--primary-bg);
+    border: none;
+    border-radius: 50%;
+    width: 45px;
+    height: 45px;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease, transform 0.2s ease, opacity 0.3s ease;
+    opacity: 0.8; /* Slightly transparent */
+    outline: none;
+}
+.carousel-button:focus-visible {
+    box-shadow: 0 0 0 3px var(--text-color-light), 0 0 0 6px var(--accent-color);
+}
+
+.carousel-button:hover {
+    background-color: var(--button-hover-bg);
+    transform: translateY(-50%) scale(1.05);
+    opacity: 1;
+}
+
+.carousel-button.prev { left: 0; }
+.carousel-button.next { right: 0; }
+
+/* FAQ Section */
+.faq-list {
+    max-width: 800px;
+    margin: 50px auto 0;
+    text-align: left;
+}
+
+.faq-item {
+    background: var(--secondary-bg);
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--border-color);
+}
+
+.faq-question {
+    display: block; /* Make summary behave like a block */
+    padding: 20px 25px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--accent-color);
+    cursor: pointer;
+    position: relative;
+    user-select: none; /* Prevent text selection on click */
+    outline: none; /* Remove default focus outline */
+}
+.faq-question:focus-visible {
+    box-shadow: 0 0 0 3px var(--text-color-light), 0 0 0 6px var(--accent-color);
+    border-radius: 10px;
+}
+
+.faq-question::marker, /* Hide default arrow in some browsers */
+.faq-question::-webkit-details-marker {
+    display: none;
+}
+
+.faq-question::after {
+    content: '+';
+    position: absolute;
+    right: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.5rem;
+    color: var(--text-color-light);
+    transition: transform 0.2s ease;
+}
+
+.faq-item[open] .faq-question::after {
+    content: '-';
+    transform: translateY(-50%) rotate(0deg); /* Rotate for minus sign if needed */
+}
+
+.faq-answer {
+    padding: 0 25px 20px;
+    font-size: 1rem;
+    color: var(--text-color-dark);
+}
+
+/* Contact Section */
+.contact-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    margin-top: 50px;
+    text-align: left;
+}
+
+.contact-form {
+    background: var(--secondary-bg);
+    padding: 35px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.contact-form input,
+.contact-form textarea {
+    padding: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    background: #25334d; /* Slightly different input background */
+    color: var(--text-color-light);
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    outline: none;
+}
+
+.contact-form input::placeholder,
+.contact-form textarea::placeholder {
+    color: var(--text-color-dark);
+    opacity: 0.8;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 3px rgba(45, 211, 199, 0.3);
+}
+
+.contact-form .primary-button {
+    width: fit-content; /* Make button only as wide as its content */
+    margin-top: 10px;
+}
+
+.contact-info {
+    background: var(--secondary-bg);
+    padding: 35px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.contact-info h3 {
+    color: var(--text-color-light);
+    margin-bottom: 25px;
+    font-size: 1.6rem;
+}
+
+.contact-info p {
+    margin-bottom: 15px;
+    font-size: 1.05rem;
+    color: var(--text-color-dark);
+    display: flex;
+    align-items: center;
+}
+
+.contact-info p i {
+    color: var(--accent-color);
+    margin-right: 10px;
+    font-size: 1.2rem;
+}
+
+.contact-info .small-text {
+    font-size: 0.9rem;
+    margin-top: 20px;
+    color: var(--text-color-dark);
+}
+
+/* WhatsApp Button in Contact Section (Option 2 - Uncomment in HTML to use) */
+.whatsapp-button {
+    background-color: #25d366; /* WhatsApp green */
+    color: #FFF;
+    margin-top: 20px;
+    display: inline-flex; /* Use flex to align icon and text */
+    align-items: center;
+    gap: 8px; /* Space between icon and text */
+    padding: 12px 25px; /* Slightly adjust padding for a button within info */
+    font-size: 1rem;
+    border-radius: 8px; /* Slightly less rounded than pill shape */
+    box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+}
+
+.whatsapp-button:hover {
+    background-color: #1DA851; /* Darker green on hover */
+    transform: translateY(-3px); /* Subtle lift */
+    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.4);
+}
+
+.whatsapp-button:focus-visible {
+    box-shadow: 0 0 0 4px var(--text-color-light), 0 0 0 8px #25d366;
+}
+
+
+/* Footer */
+footer {
+    background: var(--secondary-bg);
+    padding: 30px 20px;
+    text-align: center;
+    font-size: 0.95rem;
+    color: var(--text-color-dark);
+    border-top: 2px solid var(--border-color);
+}
+
+footer .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Fade-in Animation */
+.fade-in-section {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.fade-in-section.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Floating WhatsApp Button (Option 1 - Recommended) */
+.whatsapp-float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 40px; /* Distance from bottom */
+    right: 40px; /* Distance from right */
+    background-color: #25d366; /* WhatsApp green */
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 2px 2px 3px rgba(0,0,0,0.4);
+    z-index: 1001; /* Ensure it's above other content */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-decoration: none; /* Remove underline */
+    outline: none; /* Remove default focus outline */
+}
+
+.whatsapp-float:hover {
+    transform: scale(1.1);
+    box-shadow: 4px 4px 8px rgba(0,0,0,0.6);
+}
+
+.whatsapp-float:focus-visible { /* Custom focus for accessibility */
+    box-shadow: 0 0 0 4px var(--text-color-light), 0 0 0 8px #25d366;
+}
+
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    h1 { font-size: 3rem; }
+    h2 { font-size: 2.4rem; }
+    h3 { font-size: 1.5rem; }
+
+    .main-nav .nav-list li {
+        margin-left: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .header-content {
+        justify-content: center;
+        flex-direction: column;
+        text-align: center;
+    }
+    .header-logo {
+        margin-bottom: 15px;
+    }
+    .main-nav {
+        display: none; /* Hide nav by default on mobile */
+        width: 100%;
+        margin-top: 20px;
+    }
+    .main-nav.active { /* Show nav when active */
+        display: block;
+        max-height: 300px; /* Limit height and allow overflow */
+        overflow-y: auto; /* Scroll if too many items */
+        transition: max-height 0.3s ease-in-out;
+    }
+    .main-nav .nav-list {
+        flex-direction: column;
+        align-items: center;
+    }
+    .main-nav .nav-list li {
+        margin: 10px 0;
+    }
+    .hamburger {
+        display: block; /* Show hamburger on mobile */
+        position: absolute;
+        top: 20px;
+        right: 20px;
+    }
+
+    .hero {
+        padding: 90px 20px;
+    }
+    .hero h1 {
+        font-size: 2.5rem;
+    }
+    .hero p {
+        font-size: 1.1rem;
+    }
+
+    section {
+        padding: 60px 20px;
+    }
+    h2 {
+        font-size: 2rem;
+    }
+
+    .services-grid, .contact-content {
+        grid-template-columns: 1fr; /* Stack columns */
+    }
+
+    .testimonial-carousel {
+        padding: 0; /* Remove padding for buttons */
+    }
+    .carousel-button.prev { left: 5px; }
+    .carousel-button.next { right: 5px; }
+
+    .contact-form, .contact-info {
+        padding: 25px;
+    }
+
+    .whatsapp-float {
+        width: 50px;
+        height: 50px;
+        bottom: 20px;
+        right: 20px;
+        font-size: 25px;
+    }
+}
+
+@media (max-width: 480px) {
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.8rem; }
+    h3 { font-size: 1.4rem; }
+    .button {
+        padding: 12px 25px;
+        font-size: 0.95rem;
+    }
+    .header-logo {
+        width: 150px;
+    }
+}
