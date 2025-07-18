@@ -1,90 +1,139 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Hamburger Menu Functionality
+    // Hamburger menu functionality
     const hamburger = document.querySelector('.hamburger');
     const nav = document.querySelector('.nav');
+    const navList = document.querySelector('.nav-list');
 
-    if (hamburger && nav) {
-        hamburger.addEventListener('click', () => {
-            nav.classList.toggle('active');
-            hamburger.classList.toggle('active'); // Optional: Add active state for hamburger animation
+    hamburger.addEventListener('click', () => {
+        nav.classList.toggle('active');
+        hamburger.classList.toggle('active'); // Optional: for animating the hamburger icon
+    });
+
+    // Close mobile nav when a link is clicked
+    navList.addEventListener('click', (e) => {
+        if (e.target.tagName === 'A') {
+            nav.classList.remove('active');
+            hamburger.classList.remove('active');
+        }
+    });
+
+    // Smooth scrolling for navigation links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            // Check if the target is on the current page (starts with '#')
+            // If it's a link to blog.html or another full page, let the default behavior happen
+            if (this.getAttribute('href').startsWith('#')) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            }
         });
+    });
 
-        // Close nav when a link is clicked (for smooth scrolling)
-        document.querySelectorAll('.nav-list a').forEach(link => {
-            link.addEventListener('click', () => {
-                nav.classList.remove('active');
-                hamburger.classList.remove('active');
-            });
+    // Video lazy loading
+    const videoItems = document.querySelectorAll('.testimonial-item video');
+
+    const videoObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const video = entry.target;
+                const source = video.querySelector('source');
+                if (source && source.dataset.src) {
+                    source.src = source.dataset.src;
+                    video.load(); // Load the video
+                }
+                video.src = video.dataset.src; // For videos without source tags
+                observer.unobserve(video); // Stop observing once loaded
+            }
         });
-    }
+    }, {
+        rootMargin: '0px 0px 200px 0px', // Load 200px before reaching viewport
+        threshold: 0
+    });
 
-    // FAQ Accordion Functionality
+    videoItems.forEach(video => {
+        videoObserver.observe(video);
+    });
+
+    // FAQ Accordion functionality
     const accordionHeaders = document.querySelectorAll('.accordion-header');
 
     accordionHeaders.forEach(header => {
         header.addEventListener('click', () => {
-            // The accordionItem is the parent div, but we only need the header and content
-            // const accordionItem = header.parentElement; // Not strictly needed for this logic
+            const currentContent = header.nextElementSibling;
+            const currentActive = document.querySelector('.accordion-header.active');
 
-            const accordionContent = header.nextElementSibling; // Get the content div (the very next sibling)
-
-            // Toggle active class on the header
-            header.classList.toggle('active');
-
-            // Toggle the max-height for smooth open/close
-            if (accordionContent.style.maxHeight) {
-                accordionContent.style.maxHeight = null; // Close
-            } else {
-                // Set max-height to scrollHeight to open the accordion
-                // This makes sure it's tall enough for its content
-                accordionContent.style.maxHeight = accordionContent.scrollHeight + "px";
+            // Close other open accordions if they are not the current one
+            if (currentActive && currentActive !== header) {
+                currentActive.classList.remove('active');
+                currentActive.nextElementSibling.style.maxHeight = null;
+                currentActive.nextElementSibling.style.padding = '0 30px';
             }
 
-            // Close other open accordions (optional, but good UX)
-            // This ensures only one FAQ item is open at a time
-            accordionHeaders.forEach(otherHeader => {
-                if (otherHeader !== header && otherHeader.classList.contains('active')) {
-                    otherHeader.classList.remove('active');
-                    // Get the content for the *other* header and close it
-                    otherHeader.nextElementSibling.style.maxHeight = null;
-                }
-            });
+            // Toggle the clicked accordion
+            header.classList.toggle('active');
+            if (currentContent.style.maxHeight) {
+                currentContent.style.maxHeight = null;
+                currentContent.style.padding = '0 30px';
+            } else {
+                currentContent.style.maxHeight = currentContent.scrollHeight + 40 + 'px'; // +40 for top/bottom padding
+                currentContent.style.padding = '20px 30px';
+            }
         });
     });
 
-    // Lazy Load Videos
-    const lazyVideos = document.querySelectorAll('video[data-src]');
+    // Text Testimonial Carousel Functionality
+    const testimonialItems = document.querySelectorAll('.testimonial-text-item');
+    const prevButton = document.querySelector('.prev-testimonial');
+    const nextButton = document.querySelector('.next-testimonial');
+    let currentTestimonialIndex = 0;
+    let testimonialInterval; // To store the interval ID for auto-play
 
-    if ('IntersectionObserver' in window) {
-        const videoObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const video = entry.target;
-                    const source = video.querySelector('source[data-src]');
-
-                    if (source) {
-                        source.src = source.dataset.src;
-                    }
-                    video.load(); // Load the video
-                    video.dataset.src = ''; // Clear data-src to prevent re-loading
-                    observer.unobserve(video);
-                }
-            });
-        }, {
-            threshold: 0.2 // Start loading when 20% of video is visible
-        });
-
-        lazyVideos.forEach(video => {
-            videoObserver.observe(video);
-        });
-    } else {
-        // Fallback for browsers that don't support Intersection Observer
-        lazyVideos.forEach(video => {
-            const source = video.querySelector('source[data-src]');
-            if (source) {
-                source.src = source.dataset.src;
+    function showTestimonial(index) {
+        testimonialItems.forEach((item, i) => {
+            item.classList.remove('active');
+            if (i === index) {
+                item.classList.add('active');
             }
-            video.load();
         });
     }
-});
+
+    function nextTestimonial() {
+        currentTestimonialIndex = (currentTestimonialIndex + 1) % testimonialItems.length;
+        showTestimonial(currentTestimonialIndex);
+    }
+
+    function prevTestimonial() {
+        currentTestimonialIndex = (currentTestimonialIndex - 1 + testimonialItems.length) % testimonialItems.length;
+        showTestimonial(currentTestimonialIndex);
+    }
+
+    function startAutoPlay() {
+        // Clear any existing interval to prevent multiple auto-plays
+        clearInterval(testimonialInterval);
+        testimonialInterval = setInterval(nextTestimonial, 7000); // Change testimonial every 7 seconds
+    }
+
+    // Event Listeners for manual navigation
+    if (prevButton && nextButton) { // Check if buttons exist before adding listeners
+        prevButton.addEventListener('click', () => {
+            clearInterval(testimonialInterval); // Stop auto-play on manual navigation
+            prevTestimonial();
+            startAutoPlay(); // Restart auto-play after manual navigation
+        });
+
+        nextButton.addEventListener('click', () => {
+            clearInterval(testimonialInterval); // Stop auto-play on manual navigation
+            nextTestimonial();
+            startAutoPlay(); // Restart auto-play after manual navigation
+        });
+    }
+
+    // Initialize carousel: show the first testimonial and start auto-play
+    if (testimonialItems.length > 0) { // Check if testimonials exist before initializing
+        showTestimonial(currentTestimonialIndex);
+        startAutoPlay();
+    }
+
+}); // End of DOMContentLoaded
