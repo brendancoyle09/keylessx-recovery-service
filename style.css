@@ -484,7 +484,7 @@ h2::after {
     padding: 0 30px; /* Match header padding */
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.3s ease-out;
+    transition: max-height 0.4s ease-out; /* Adjusted transition timing */
 }
 
 .accordion-content p {
