@@ -912,9 +912,10 @@ a:hover {
     transform: translateY(-5px);
 }
 
-.whatsapp-button img {
-    width: 35px;
-    height: 35px;
+/* Style for the Font Awesome icon inside the WhatsApp button */
+.whatsapp-button i {
+    font-size: 35px; /* Size of the icon */
+    color: white; /* Color of the icon */
 }
 
 
@@ -973,9 +974,8 @@ a:hover {
         height: 50px;
     }
 
-    .whatsapp-button img {
-        width: 28px;
-        height: 28px;
+    .whatsapp-button i { /* Adjust icon size for smaller button */
+        font-size: 28px;
     }
 
     /* Adjust new sections for smaller screens */
@@ -1047,9 +1047,8 @@ a:hover {
         height: 45px;
     }
 
-    .whatsapp-button img {
-        width: 25px;
-        height: 25px;
+    .whatsapp-button i { /* Adjust icon size for smaller button */
+        font-size: 25px;
     }
 
     .security-trust-section .security-feature h3 i {
@@ -1105,8 +1104,7 @@ a:hover {
         right: 50px; /* Final adjustment for small phone screens */
     }
 
-    .whatsapp-button img {
-        width: 22px;
-        height: 22px;
+    .whatsapp-button i { /* Adjust icon size for smaller button */
+        font-size: 22px;
     }
 }
