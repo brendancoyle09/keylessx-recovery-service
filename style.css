@@ -42,16 +42,31 @@ section {
     background-color: transparent; /* Ensures image backgrounds are visible */
 }
 
-/* --- Global Background Image for Sections & Footer --- */
+/* --- Specific Background Images for Sections --- */
+
+/* Hero Section Background */
+.hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('bg-abstract-neon.jpg') no-repeat center center/cover;
+    background-attachment: fixed; /* Parallax effect */
+    color: var(--light-text);
+    text-align: center;
+    padding: 180px 20px 100px;
+    min-height: 100vh; /* Full viewport height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* General Sections with Background Image (e.g., Services, Why Us, Process, Testimonials, FAQ) */
 .section-with-bg-image {
-    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('crypto-banner.jpg') no-repeat center center/cover;
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('bg-ethereum-logo.jpg') no-repeat center center/cover;
     background-attachment: scroll; /* Image scrolls with content */
     background-position: center center;
 }
 
-/* Footer specific background - slightly darker overlay */
+/* Footer Specific Background */
 .footer {
-    background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), url('crypto-banner.jpg') no-repeat center center/cover;
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('bg-office-people.jpg') no-repeat center center/cover;
     background-attachment: scroll;
     background-position: center center;
     padding: 60px 0 20px;
@@ -59,7 +74,7 @@ section {
     color: var(--mid-text);
     font-size: 0.95em;
 }
-/* --- End Global Background Image --- */
+/* --- End Specific Background Images --- */
 
 
 /* Font size adjustments for professional style */
@@ -78,6 +93,16 @@ h2 {
     color: var(--accent-color);
 }
 
+h2::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 4px;
+    background-color: var(--accent-color);
+    margin: 20px auto 0;
+    border-radius: 2px;
+}
+
 h3 {
     font-size: 1.6em; /* Reduced from 1.8em */
     color: var(--light-text);
@@ -89,81 +114,34 @@ p {
     line-height: 1.5; /* Adjusted from 1.6 */
 }
 
-.hero p {
-    font-size: 1.2em; /* Reduced from 1.3em */
-    max-width: 800px;
-    margin: 20px auto 40px;
-}
-
-.nav-list a {
-    font-size: 1em; /* Reduced from 1.1em */
-    color: var(--light-text);
-    font-weight: 500;
-    position: relative;
-    padding-bottom: 5px;
-}
-
-.service-item p,
-.why-us-item p,
-.process-step p {
-    font-size: 0.9em; /* Reduced from 0.95em */
-    color: var(--mid-text);
-}
-
-.testimonial-text-item p {
-    font-size: 1.1em; /* Reduced from 1.3em */
-    font-style: italic;
-    color: var(--light-text);
-    margin-bottom: 20px;
-    line-height: 1.5;
-    max-width: 700px;
-}
-
-.testimonial-text-item h4 {
-    font-size: 1em; /* Reduced from 1.2em */
+a {
     color: var(--accent-color);
-    margin-bottom: 0;
+    text-decoration: none;
+    transition: color 0.3s ease;
 }
 
-.accordion-header {
-    font-size: 1.1em; /* Reduced from 1.2em */
-    /* other styles remain */
+a:hover {
+    color: var(--border-color);
 }
 
-.accordion-content p {
-    padding: 20px 0;
-    margin-bottom: 0;
-    line-height: 1.6; /* Reduced from 1.7 */
-}
-
-.contact-intro {
-    font-size: 1.1em; /* Reduced from 1.2em */
-    max-width: 700px;
-    margin: 0 auto 40px;
-}
-
-.contact-info p {
-    font-size: 1em; /* Reduced from 1.1em */
-    margin-bottom: 10px;
+.btn {
+    display: inline-block;
+    background-color: var(--accent-color);
     color: var(--light-text);
+    padding: 15px 30px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    border: none;
+    cursor: pointer;
 }
 
-.form-group label {
-    font-size: 1em; /* Reduced from 1.1em */
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 500;
-    color: var(--light-text);
+.btn:hover {
+    background-color: #ff5577; /* Slightly lighter accent */
+    transform: translateY(-3px);
 }
-
-.footer-col h3 {
-    font-size: 1.2em; /* Reduced from 1.4em */
-    color: var(--light-text);
-    margin-bottom: 20px;
-}
-
-/* --- End Font size adjustments --- */
-
 
 /* Header */
 .header {
@@ -194,6 +172,14 @@ p {
 
 .nav-list li {
     margin-left: 30px;
+}
+
+.nav-list a {
+    font-size: 1em; /* Reduced from 1.1em */
+    color: var(--light-text);
+    font-weight: 500;
+    position: relative;
+    padding-bottom: 5px;
 }
 
 .nav-list a::after {
@@ -261,36 +247,11 @@ p {
     }
 }
 
-/* Hero Section */
-.hero {
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('crypto-banner.jpg') no-repeat center center/cover;
-    background-attachment: fixed; /* Parallax effect */
-    color: var(--light-text);
-    text-align: center;
-    padding: 180px 20px 100px;
-    min-height: 100vh; /* Full viewport height */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 
-.btn {
-    display: inline-block;
-    background-color: var(--accent-color);
-    color: var(--light-text);
-    padding: 15px 30px;
-    border-radius: 5px;
-    text-transform: uppercase;
-    font-weight: bold;
-    letter-spacing: 1px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    border: none;
-    cursor: pointer;
-}
-
-.btn:hover {
-    background-color: #ff5577; /* Slightly lighter accent */
-    transform: translateY(-3px);
+.hero p {
+    font-size: 1.2em; /* Reduced from 1.3em */
+    max-width: 800px;
+    margin: 20px auto 40px;
 }
 
 /* About Us Section (Specific content styles) */
@@ -339,6 +300,10 @@ p {
     color: var(--border-color);
 }
 
+.service-item p {
+    font-size: 0.9em; /* Reduced from 0.95em */
+    color: var(--mid-text);
+}
 
 /* Why Us Section */
 .why-us-section {
@@ -377,6 +342,9 @@ p {
     color: var(--accent-color);
 }
 
+.why-us-item p {
+    font-size: 0.9em; /* Reduced from 0.95em */
+}
 
 /* Process Section */
 .process-section {
@@ -422,6 +390,9 @@ p {
     margin-bottom: 10px;
 }
 
+.process-step p {
+    font-size: 0.9em; /* Reduced from 0.95em */
+}
 
 /* Testimonials Section */
 .testimonials-section {
@@ -459,7 +430,7 @@ p {
     background-color: #000; /* Fallback for video area */
 }
 
-/* Text Testimonial Carousel Styling */
+/* NEW: Text Testimonial Carousel Styling */
 .text-testimonial-carousel {
     max-width: 900px;
     margin: 80px auto 0; /* More spacing from video carousel */
@@ -499,6 +470,20 @@ p {
     display: flex; /* Only active item is shown */
 }
 
+.testimonial-text-item p {
+    font-size: 1.1em; /* Reduced from 1.3em */
+    font-style: italic;
+    color: var(--light-text);
+    margin-bottom: 20px;
+    line-height: 1.5;
+    max-width: 700px;
+}
+
+.testimonial-text-item h4 {
+    font-size: 1em; /* Reduced from 1.2em */
+    color: var(--accent-color);
+    margin-bottom: 0;
+}
 
 .carousel-nav {
     position: absolute;
@@ -558,6 +543,7 @@ p {
     border: none;
     outline: none;
     cursor: pointer;
+    font-size: 1.1em; /* Reduced from 1.2em */
     font-weight: 500;
     display: flex;
     justify-content: space-between;
@@ -591,17 +577,33 @@ p {
     color: var(--mid-text);
 }
 
+.accordion-content p {
+    padding: 20px 0;
+    margin-bottom: 0;
+    line-height: 1.6; /* Reduced from 1.7 */
+}
+
 
 /* Contact Section */
 .contact-section {
     text-align: center;
 }
 
+.contact-intro {
+    font-size: 1.1em; /* Reduced from 1.2em */
+    max-width: 700px;
+    margin: 0 auto 40px;
+}
 
 .contact-info {
     margin-bottom: 50px;
 }
 
+.contact-info p {
+    font-size: 1em; /* Reduced from 1.1em */
+    margin-bottom: 10px;
+    color: var(--light-text);
+}
 
 .contact-info a {
     color: var(--border-color);
@@ -622,6 +624,13 @@ p {
     text-align: left;
 }
 
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--light-text);
+    font-size: 1em; /* Reduced from 1.1em */
+}
 
 .form-group input,
 .form-group textarea {
