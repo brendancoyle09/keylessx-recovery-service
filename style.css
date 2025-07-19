@@ -59,18 +59,20 @@ section {
 
 /* General Sections with Background Image (e.g., Services, Why Us, Process, Testimonials, FAQ) */
 .section-with-bg-image {
-    /* Now uses bg-office-people.jpg with a slightly darker overlay for readability */
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('bg-office-people.jpg') no-repeat center center/cover;
+    /* Uses bg-office-people.jpg with a slightly less dark overlay for better visibility */
+    background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.75)), url('bg-office-people.jpg') no-repeat center center/cover;
     background-attachment: scroll; /* Image scrolls with content */
     background-position: center center;
+    background-size: cover; /* Ensures image covers the section */
 }
 
 /* Footer Specific Background */
 .footer {
-    /* Now uses bg-ethereum-logo.jpg with a slightly lighter overlay */
+    /* Uses bg-ethereum-logo.jpg with a slightly lighter overlay */
     background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url('bg-ethereum-logo.jpg') no-repeat center center/cover;
     background-attachment: scroll;
     background-position: center center;
+    background-size: cover;
     padding: 60px 0 20px;
     border-top: 1px solid var(--border-color);
     color: var(--mid-text);
@@ -351,8 +353,6 @@ a:hover {
 /* NEW: Security & Trust Section */
 .security-trust-section {
     text-align: center;
-    background-color: var(--secondary-bg); /* Use secondary background for clear separation */
-    padding: 100px 0;
 }
 
 .security-trust-section .security-content {
@@ -721,7 +721,6 @@ a:hover {
 /* NEW: Our Experts Section */
 .our-experts-section {
     text-align: center;
-    background-color: var(--secondary-bg); /* Use secondary background for clear separation */
 }
 
 .our-experts-section .expert-intro {
@@ -998,6 +997,15 @@ a:hover {
 
     .hero p {
         font-size: 1em;
+    }
+
+    .btn {
+        padding: 10px 20px;
+        font-size: 0.85em;
+    }
+
+    .logo img {
+        height: 50px; /* Smallest size for very small screens */
     }
 
     .service-grid, .why-us-grid, .process-grid, .case-studies-grid, .experts-grid {

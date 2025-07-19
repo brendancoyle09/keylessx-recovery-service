@@ -24,7 +24,7 @@
                     <li><a href="#testimonials">Testimonials</a></li>
                     <li><a href="#case-studies">Case Studies</a></li>
                     <li><a href="#faq">FAQ</a></li>
-                    <li><a href="#our-experts">Our Experts</a></li>
+                    <li><a href="#our-experts">Experts</a></li>
                     <li><a href="#initial-assessment">Assessment</a></li>
                 </ul>
             </nav>
@@ -45,7 +45,7 @@
             </div>
         </section>
 
-        <section id="about-us" class="about-us">
+        <section id="about-us" class="about-us section-with-bg-image">
             <div class="container">
                 <h2>About KeylessX</h2>
                 <div class="about-content">
@@ -93,7 +93,7 @@
             </div>
         </section>
 
-        <section id="why-us" class="why-us-section">
+        <section id="why-us" class="why-us-section section-with-bg-image">
             <div class="container">
                 <h2>Why Choose KeylessX?</h2>
                 <div class="why-us-grid">
@@ -121,7 +121,7 @@
             </div>
         </section>
 
-        <section id="security-trust" class="security-trust-section">
+        <section id="security-trust" class="security-trust-section section-with-bg-image">
             <div class="container">
                 <h2>Security & Trust: Our Unwavering Commitment</h2>
                 <div class="security-content">
@@ -151,7 +151,7 @@
             </div>
         </section>
 
-        <section id="process" class="process-section">
+        <section id="process" class="process-section section-with-bg-image">
             <div class="container">
                 <h2>Our Seamless Recovery Process</h2>
                 <div class="process-grid">
@@ -179,7 +179,7 @@
             </div>
         </section>
 
-        <section id="testimonials" class="testimonials-section">
+        <section id="testimonials" class="testimonials-section section-with-bg-image">
             <div class="container">
                 <h2>Hear From Our Satisfied Clients</h2>
                 <div class="testimonial-carousel">
@@ -258,7 +258,7 @@
             </div>
         </section>
 
-        <section id="faq" class="faq-section">
+        <section id="faq" class="faq-section section-with-bg-image">
             <div class="container">
                 <h2>Frequently Asked Questions</h2>
                 <div class="faq-search-container">
@@ -326,7 +326,7 @@
             </div>
         </section>
 
-        <section id="our-experts" class="our-experts-section">
+        <section id="our-experts" class="our-experts-section section-with-bg-image">
             <div class="container">
                 <h2>Meet Our Expert Recovery Team</h2>
                 <p class="expert-intro">Our success is built on the unparalleled expertise of our dedicated team. Each member brings a wealth of knowledge in cryptography, blockchain technology, and cybersecurity, united by a singular mission: to recover your lost digital assets.</p>
@@ -431,8 +431,8 @@
                 </div>
                 <div class="footer-col">
                     <h3>Contact Us</h3>
-                    <p>Email: <a href="mailto:info@keylessx.com">info@keylessx.com</a></p>
-                    <p>Phone: <a href="tel:+1234567890">+1 (234) 567-890</a></p>
+                    <p>Email: <a href="mailto:keylessxservice@protonmail.com">keylessxservice@protonmail.com</a></p>
+                    <p>Phone: <a href="tel:+18632824505">+1-863-282-4505</a></p>
                     <div class="social-links">
                         <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
                         <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
@@ -447,77 +447,10 @@
         </div>
     </footer>
 
-    <a href="https://wa.me/YOURPHONENUMBER" class="whatsapp-button" target="_blank" aria-label="Chat on WhatsApp">
+    <a href="https://wa.me/18632824505" class="whatsapp-button" target="_blank" aria-label="Chat on WhatsApp">
         <img src="image_f8ba9e.png" alt="WhatsApp">
     </a>
 
     <script src="script.js"></script>
-    <script>
-        // Hamburger Menu functionality
-        document.querySelector('.hamburger').addEventListener('click', function() {
-            document.querySelector('.nav').classList.toggle('active');
-        });
-
-        // Close mobile menu on nav item click
-        document.querySelectorAll('.nav-list a').forEach(item => {
-            item.addEventListener('click', () => {
-                const nav = document.querySelector('.nav');
-                if (nav.classList.contains('active')) {
-                    nav.classList.remove('active');
-                }
-            });
-        });
-
-        // Testimonial Carousel (Existing JS)
-        const testimonialWrapper = document.querySelector('.testimonial-text-wrapper');
-        const testimonialItems = document.querySelectorAll('.testimonial-text-item');
-        const prevBtn = document.querySelector('.prev-testimonial');
-        const nextBtn = document.querySelector('.next-testimonial');
-        let currentIndex = 0;
-
-        function showTestimonial(index) {
-            testimonialItems.forEach((item, i) => {
-                item.classList.remove('active');
-                if (i === index) {
-                    item.classList.add('active');
-                }
-            });
-        }
-
-        prevBtn.addEventListener('click', () => {
-            currentIndex = (currentIndex > 0) ? currentIndex - 1 : testimonialItems.length - 1;
-            showTestimonial(currentIndex);
-        });
-
-        nextBtn.addEventListener('click', () => {
-            currentIndex = (currentIndex < testimonialItems.length - 1) ? currentIndex + 1 : 0;
-            showTestimonial(currentIndex);
-        });
-
-        // Auto-advance testimonial carousel
-        setInterval(() => {
-            currentIndex = (currentIndex < testimonialItems.length - 1) ? currentIndex + 1 : 0;
-            showTestimonial(currentIndex);
-        }, 8000); // Change testimonial every 8 seconds
-
-        // FAQ Accordion (Existing JS)
-        document.querySelectorAll('.accordion-header').forEach(button => {
-            button.addEventListener('click', () => {
-                const accordionContent = button.nextElementSibling;
-
-                button.classList.toggle('active');
-
-                if (button.classList.contains('active')) {
-                    accordionContent.style.maxHeight = accordionContent.scrollHeight + 'px';
-                    accordionContent.style.paddingTop = '20px';
-                    accordionContent.style.paddingBottom = '20px';
-                } else {
-                    accordionContent.style.maxHeight = 0;
-                    accordionContent.style.paddingTop = '0';
-                    accordionContent.style.paddingBottom = '0';
-                }
-            });
-        });
-    </script>
 </body>
 </html>
