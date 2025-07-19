@@ -19,7 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-
     // Smooth scrolling for navigation links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
@@ -74,7 +73,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-
     // FAQ Accordion functionality
     const accordionHeaders = document.querySelectorAll('.accordion-header');
 
@@ -103,6 +101,27 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     });
+
+    // NEW: FAQ Search Functionality
+    const faqSearchInput = document.getElementById('faqSearch');
+    const accordionItems = document.querySelectorAll('.accordion-item');
+
+    if (faqSearchInput) {
+        faqSearchInput.addEventListener('keyup', function() {
+            const searchTerm = faqSearchInput.value.toLowerCase();
+
+            accordionItems.forEach(item => {
+                const headerText = item.querySelector('.accordion-header').textContent.toLowerCase();
+                const contentText = item.querySelector('.accordion-content').textContent.toLowerCase();
+
+                if (headerText.includes(searchTerm) || contentText.includes(searchTerm)) {
+                    item.classList.remove('hidden'); // Show if matches
+                } else {
+                    item.classList.add('hidden'); // Hide if no match
+                }
+            });
+        });
+    }
 
     // Text Testimonial Carousel Functionality
     const testimonialItems = document.querySelectorAll('.testimonial-text-item');
@@ -157,6 +176,45 @@ document.addEventListener('DOMContentLoaded', () => {
         if (testimonialItems.length > 1) { // Only auto-play if there's more than one testimonial
             startAutoPlay();
         }
+    }
+
+    // NEW: Initial Assessment Form Submission (and basic validation)
+    const assessmentForm = document.querySelector('.assessment-form');
+    if (assessmentForm) {
+        assessmentForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // Basic client-side validation example
+            const fullName = document.getElementById('fullName').value;
+            const email = document.getElementById('email').value;
+            const cryptoType = document.getElementById('cryptoType').value;
+            const lossScenario = document.getElementById('lossScenario').value;
+            const lossDetails = document.getElementById('lossDetails').value;
+
+            if (!fullName || !email || !cryptoType || !lossScenario || !lossDetails) {
+                alert('Please fill in all required fields marked with an asterisk (*).');
+                return;
+            }
+
+            if (!/\S+@\S+\.\S+/.test(email)) {
+                alert('Please enter a valid email address.');
+                return;
+            }
+
+            // In a real application, you would send this data to a server here (e.g., using fetch API)
+            console.log('Form Submitted!', {
+                fullName,
+                email,
+                cryptoType,
+                lossScenario,
+                lossDetails,
+                contactNumber: document.getElementById('contactNumber').value,
+                lastAccessed: document.getElementById('lastAccessed').value
+            });
+
+            alert('Your assessment request has been submitted successfully! We will contact you soon.');
+            assessmentForm.reset(); // Clear the form
+        });
     }
 
 }); // End of DOMContentLoaded

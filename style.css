@@ -59,7 +59,7 @@ section {
 
 /* General Sections with Background Image (e.g., Services, Why Us, Process, Testimonials, FAQ) */
 .section-with-bg-image {
-    /* Swapped to bg-office-people.jpg with a slightly darker overlay for readability */
+    /* Now uses bg-office-people.jpg with a slightly darker overlay for readability */
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('bg-office-people.jpg') no-repeat center center/cover;
     background-attachment: scroll; /* Image scrolls with content */
     background-position: center center;
@@ -67,7 +67,7 @@ section {
 
 /* Footer Specific Background */
 .footer {
-    /* Swapped to bg-ethereum-logo.jpg with a slightly lighter overlay */
+    /* Now uses bg-ethereum-logo.jpg with a slightly lighter overlay */
     background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)), url('bg-ethereum-logo.jpg') no-repeat center center/cover;
     background-attachment: scroll;
     background-position: center center;
@@ -348,6 +348,43 @@ a:hover {
     font-size: 0.9em; /* Reduced from 0.95em */
 }
 
+/* NEW: Security & Trust Section */
+.security-trust-section {
+    text-align: center;
+    background-color: var(--secondary-bg); /* Use secondary background for clear separation */
+    padding: 100px 0;
+}
+
+.security-trust-section .security-content {
+    max-width: 900px;
+    margin: 0 auto;
+    font-size: 1.1em;
+}
+
+.security-trust-section .security-feature {
+    background-color: var(--card-bg);
+    padding: 30px;
+    border-radius: 10px;
+    margin-top: 30px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border-color);
+    text-align: left;
+}
+
+.security-trust-section .security-feature h3 {
+    color: var(--accent-color);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.security-trust-section .security-feature h3 i {
+    font-size: 1.5em;
+    margin-right: 15px;
+    color: var(--border-color);
+}
+
+
 /* Process Section */
 .process-section {
     text-align: center;
@@ -432,7 +469,7 @@ a:hover {
     background-color: #000; /* Fallback for video area */
 }
 
-/* NEW: Text Testimonial Carousel Styling */
+/* Text Testimonial Carousel */
 .text-testimonial-carousel {
     max-width: 900px;
     margin: 80px auto 0; /* More spacing from video carousel */
@@ -513,15 +550,106 @@ a:hover {
     color: #00e5ff; /* Brighter accent on hover */
 }
 
+/* NEW: Case Studies Section */
+.case-studies-section {
+    text-align: center;
+}
+
+.case-studies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+    margin-top: 50px;
+}
+
+.case-study-item {
+    background-color: var(--card-bg);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--accent-color);
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.case-study-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+}
+
+.case-study-item h3 {
+    color: var(--border-color);
+    margin-bottom: 15px;
+    font-size: 1.4em;
+}
+
+.case-study-item p {
+    font-size: 0.95em;
+    color: var(--mid-text);
+    margin-bottom: 10px;
+}
+
+.case-study-item p strong {
+    color: var(--light-text);
+}
+
+.case-study-item .read-more {
+    display: inline-block;
+    margin-top: 15px;
+    color: var(--accent-color);
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.case-study-item .read-more:hover {
+    color: var(--border-color);
+}
+
 
 /* FAQ Section */
 .faq-section {
     text-align: center;
 }
 
+.faq-search-container {
+    max-width: 800px;
+    margin: 0px auto 40px; /* Spacing from section title */
+    position: relative;
+}
+
+.faq-search-container input {
+    width: 100%;
+    padding: 15px 45px 15px 20px; /* Space for icon */
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    background-color: var(--card-bg);
+    color: var(--light-text);
+    font-size: 1em;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.faq-search-container input::placeholder {
+    color: var(--mid-text);
+}
+
+.faq-search-container input:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 8px rgba(233, 69, 96, 0.5);
+    outline: none;
+}
+
+.faq-search-container .fas.fa-search {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--mid-text);
+    font-size: 1.2em;
+}
+
 .faq-accordion {
     max-width: 800px;
-    margin: 50px auto 0;
+    margin: 0 auto;
     border: 1px solid var(--border-color);
     border-radius: 10px;
     overflow: hidden;
@@ -534,6 +662,11 @@ a:hover {
 
 .accordion-item:last-child {
     border-bottom: none;
+}
+
+/* Hide items that don't match search */
+.accordion-item.hidden {
+    display: none;
 }
 
 .accordion-header {
@@ -585,33 +718,68 @@ a:hover {
     line-height: 1.6; /* Reduced from 1.7 */
 }
 
+/* NEW: Our Experts Section */
+.our-experts-section {
+    text-align: center;
+    background-color: var(--secondary-bg); /* Use secondary background for clear separation */
+}
 
-/* Contact Section */
-.contact-section {
+.our-experts-section .expert-intro {
+    max-width: 800px;
+    margin: 0 auto 60px;
+    font-size: 1.1em;
+}
+
+.experts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    margin-top: 50px;
+}
+
+.expert-card {
+    background-color: var(--card-bg);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.expert-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+.expert-card .expert-icon {
+    font-size: 3.5em;
+    color: var(--accent-color);
+    margin-bottom: 20px;
+}
+
+.expert-card h3 {
+    color: var(--border-color);
+    margin-bottom: 10px;
+}
+
+.expert-card p {
+    font-size: 0.9em;
+    color: var(--mid-text);
+}
+
+
+/* Initial Assessment Section (was Contact Section) */
+.initial-assessment-section {
     text-align: center;
 }
 
-.contact-intro {
+.initial-assessment-section .assessment-intro {
     font-size: 1.1em; /* Reduced from 1.2em */
     max-width: 700px;
     margin: 0 auto 40px;
 }
 
-.contact-info {
-    margin-bottom: 50px;
-}
-
-.contact-info p {
-    font-size: 1em; /* Reduced from 1.1em */
-    margin-bottom: 10px;
-    color: var(--light-text);
-}
-
-.contact-info a {
-    color: var(--border-color);
-}
-
-.contact-form {
+.assessment-form {
     max-width: 700px;
     margin: 0 auto;
     background-color: var(--card-bg);
@@ -635,7 +803,8 @@ a:hover {
 }
 
 .form-group input,
-.form-group textarea {
+.form-group textarea,
+.form-group select { /* Added select for styling */
     width: 100%;
     padding: 15px;
     border: 1px solid rgba(0, 229, 255, 0.3);
@@ -644,16 +813,24 @@ a:hover {
     color: var(--light-text);
     font-size: 1em;
     transition: border-color 0.3s ease;
+    -webkit-appearance: none; /* Remove default select styling for custom arrow */
+    -moz-appearance: none;
+    appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23e0e0e0%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-6.5%200-13%205.4-13%2013%200%20.7.2%201.5.4%202.2l128%20128c4.5%204.5%2010.6%207%2017%207s12.5-2.5%2017-7l128-128c.4-.6.6-1.4.6-2.2z%22%2F%3E%3C%2Fsvg%3E'); /* Custom arrow */
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 12px;
 }
 
 .form-group input:focus,
-.form-group textarea:focus {
+.form-group textarea:focus,
+.form-group select:focus {
     border-color: var(--border-color);
     outline: none;
     box-shadow: 0 0 8px rgba(0, 229, 255, 0.5);
 }
 
-.contact-form .btn {
+.assessment-form .btn {
     width: auto;
     padding: 15px 40px;
     font-size: 1.1em;
@@ -801,6 +978,13 @@ a:hover {
         width: 28px;
         height: 28px;
     }
+
+    /* Adjust new sections for smaller screens */
+    .security-trust-section .security-feature,
+    .case-study-item,
+    .expert-card {
+        padding: 25px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -816,7 +1000,7 @@ a:hover {
         font-size: 1em;
     }
 
-    .service-grid, .why-us-grid, .process-grid {
+    .service-grid, .why-us-grid, .process-grid, .case-studies-grid, .experts-grid {
         grid-template-columns: 1fr;
     }
 
@@ -836,7 +1020,7 @@ a:hover {
         font-size: 2em;
     }
 
-    .contact-form {
+    .initial-assessment-section .assessment-form {
         padding: 25px;
     }
 
@@ -858,6 +1042,10 @@ a:hover {
     .whatsapp-button img {
         width: 25px;
         height: 25px;
+    }
+
+    .security-trust-section .security-feature h3 i {
+        font-size: 1.2em;
     }
 }
 
@@ -883,7 +1071,8 @@ a:hover {
         height: 50px; /* Smallest size for very small screens */
     }
 
-    .service-item, .why-us-item, .process-step, .faq-accordion, .contact-form {
+    .service-item, .why-us-item, .process-step, .faq-accordion, .initial-assessment-section .assessment-form,
+    .security-trust-section .security-feature, .case-study-item, .expert-card {
         padding: 20px;
     }
 
@@ -897,8 +1086,8 @@ a:hover {
         font-size: 1.5em;
     }
 
-    .contact-info p {
-        font-size: 0.9em;
+    .initial-assessment-section .assessment-intro {
+        font-size: 0.95em;
     }
 
     .whatsapp-button {
