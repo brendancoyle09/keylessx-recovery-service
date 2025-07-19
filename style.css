@@ -39,81 +39,131 @@ body {
 section {
     padding: 100px 0;
     margin-bottom: 20px; /* Space between sections */
-    background-color: transparent; /* Ensures gradients applied directly to sections are visible */
+    background-color: transparent; /* Ensures image backgrounds are visible */
 }
 
-/* REMOVED: section:nth-of-type(even) as backgrounds are now specific to each section ID */
-
-
-h1, h2, h3, h4 {
-    font-family: 'Montserrat', sans-serif;
-    color: var(--light-text);
-    margin-bottom: 20px;
+/* --- Global Background Image for Sections & Footer --- */
+.section-with-bg-image {
+    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('crypto-banner.jpg') no-repeat center center/cover;
+    background-attachment: scroll; /* Image scrolls with content */
+    background-position: center center;
 }
 
+/* Footer specific background - slightly darker overlay */
+.footer {
+    background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)), url('crypto-banner.jpg') no-repeat center center/cover;
+    background-attachment: scroll;
+    background-position: center center;
+    padding: 60px 0 20px;
+    border-top: 1px solid var(--border-color);
+    color: var(--mid-text);
+    font-size: 0.95em;
+}
+/* --- End Global Background Image --- */
+
+
+/* Font size adjustments for professional style */
 h1 {
-    font-size: 3.5em;
+    font-size: 2.8em; /* Reduced from 3.5em */
     text-align: center;
     color: var(--border-color); /* Hero title accent */
     text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
 }
 
 h2 {
-    font-size: 2.8em;
+    font-size: 2.2em; /* Reduced from 2.8em */
     text-align: center;
     margin-bottom: 60px;
     position: relative;
     color: var(--accent-color);
 }
 
-h2::after {
-    content: '';
-    display: block;
-    width: 80px;
-    height: 4px;
-    background-color: var(--accent-color);
-    margin: 20px auto 0;
-    border-radius: 2px;
-}
-
 h3 {
-    font-size: 1.8em;
+    font-size: 1.6em; /* Reduced from 1.8em */
     color: var(--light-text);
 }
 
 p {
     margin-bottom: 15px;
     color: var(--mid-text);
+    line-height: 1.5; /* Adjusted from 1.6 */
 }
 
-a {
-    color: var(--accent-color);
-    text-decoration: none;
-    transition: color 0.3s ease;
+.hero p {
+    font-size: 1.2em; /* Reduced from 1.3em */
+    max-width: 800px;
+    margin: 20px auto 40px;
 }
 
-a:hover {
-    color: var(--border-color);
-}
-
-.btn {
-    display: inline-block;
-    background-color: var(--accent-color);
+.nav-list a {
+    font-size: 1em; /* Reduced from 1.1em */
     color: var(--light-text);
-    padding: 15px 30px;
-    border-radius: 5px;
-    text-transform: uppercase;
-    font-weight: bold;
-    letter-spacing: 1px;
-    transition: background-color 0.3s ease, transform 0.3s ease;
-    border: none;
-    cursor: pointer;
+    font-weight: 500;
+    position: relative;
+    padding-bottom: 5px;
 }
 
-.btn:hover {
-    background-color: #ff5577; /* Slightly lighter accent */
-    transform: translateY(-3px);
+.service-item p,
+.why-us-item p,
+.process-step p {
+    font-size: 0.9em; /* Reduced from 0.95em */
+    color: var(--mid-text);
 }
+
+.testimonial-text-item p {
+    font-size: 1.1em; /* Reduced from 1.3em */
+    font-style: italic;
+    color: var(--light-text);
+    margin-bottom: 20px;
+    line-height: 1.5;
+    max-width: 700px;
+}
+
+.testimonial-text-item h4 {
+    font-size: 1em; /* Reduced from 1.2em */
+    color: var(--accent-color);
+    margin-bottom: 0;
+}
+
+.accordion-header {
+    font-size: 1.1em; /* Reduced from 1.2em */
+    /* other styles remain */
+}
+
+.accordion-content p {
+    padding: 20px 0;
+    margin-bottom: 0;
+    line-height: 1.6; /* Reduced from 1.7 */
+}
+
+.contact-intro {
+    font-size: 1.1em; /* Reduced from 1.2em */
+    max-width: 700px;
+    margin: 0 auto 40px;
+}
+
+.contact-info p {
+    font-size: 1em; /* Reduced from 1.1em */
+    margin-bottom: 10px;
+    color: var(--light-text);
+}
+
+.form-group label {
+    font-size: 1em; /* Reduced from 1.1em */
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--light-text);
+}
+
+.footer-col h3 {
+    font-size: 1.2em; /* Reduced from 1.4em */
+    color: var(--light-text);
+    margin-bottom: 20px;
+}
+
+/* --- End Font size adjustments --- */
+
 
 /* Header */
 .header {
@@ -133,7 +183,6 @@ a:hover {
 }
 
 .logo img {
-    /* Adjusted logo size */
     height: 80px;
     width: auto;
 }
@@ -145,14 +194,6 @@ a:hover {
 
 .nav-list li {
     margin-left: 30px;
-}
-
-.nav-list a {
-    color: var(--light-text);
-    font-weight: 500;
-    font-size: 1.1em;
-    position: relative;
-    padding-bottom: 5px;
 }
 
 .nav-list a::after {
@@ -233,59 +274,24 @@ a:hover {
     justify-content: center;
 }
 
-.hero p {
-    font-size: 1.3em;
-    max-width: 800px;
-    margin: 20px auto 40px;
+.btn {
+    display: inline-block;
+    background-color: var(--accent-color);
+    color: var(--light-text);
+    padding: 15px 30px;
+    border-radius: 5px;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    border: none;
+    cursor: pointer;
 }
 
-/* --- Section Backgrounds (Dull & Static fix) --- */
-/* Services Section */
-#services {
-    background: linear-gradient(135deg, var(--secondary-bg), #131d34); /* Subtle dark blue gradient */
+.btn:hover {
+    background-color: #ff5577; /* Slightly lighter accent */
+    transform: translateY(-3px);
 }
-
-/* About Us Section */
-#about {
-    background: linear-gradient(45deg, var(--primary-bg), #111a2a); /* Subtle darker blue gradient */
-}
-
-/* Why Us Section */
-#why-us {
-    background: linear-gradient(135deg, #131d34, var(--secondary-bg)); /* Another subtle dark blue gradient */
-}
-
-/* Process Section */
-#process {
-    background: linear-gradient(45deg, #111a2a, var(--primary-bg)); /* Another subtle darker blue gradient */
-}
-
-/* Testimonials Section */
-#testimonials {
-    background: linear-gradient(135deg, var(--secondary-bg), #131d34); /* Repeated gradient for alternation */
-}
-
-/* FAQ Section */
-#faq {
-    background: linear-gradient(45deg, var(--primary-bg), #111a2a); /* Repeated gradient for alternation */
-}
-
-/* Contact Section */
-#contact {
-    background: linear-gradient(135deg, #131d34, var(--secondary-bg)); /* Repeated gradient for alternation */
-}
-
-/* Footer Section */
-.footer {
-    background: linear-gradient(to top, var(--card-bg), #0a2d55); /* Deeper blue gradient for the footer */
-    padding: 60px 0 20px;
-    border-top: 1px solid var(--border-color);
-    color: var(--mid-text);
-    font-size: 0.95em;
-}
-
-/* --- End Section Backgrounds --- */
-
 
 /* About Us Section (Specific content styles) */
 .about-us .about-content {
@@ -333,10 +339,6 @@ a:hover {
     color: var(--border-color);
 }
 
-.service-item p {
-    font-size: 0.95em;
-    color: var(--mid-text);
-}
 
 /* Why Us Section */
 .why-us-section {
@@ -375,9 +377,6 @@ a:hover {
     color: var(--accent-color);
 }
 
-.why-us-item p {
-    font-size: 0.95em;
-}
 
 /* Process Section */
 .process-section {
@@ -423,9 +422,6 @@ a:hover {
     margin-bottom: 10px;
 }
 
-.process-step p {
-    font-size: 0.9em;
-}
 
 /* Testimonials Section */
 .testimonials-section {
@@ -463,7 +459,7 @@ a:hover {
     background-color: #000; /* Fallback for video area */
 }
 
-/* NEW: Text Testimonial Carousel Styling */
+/* Text Testimonial Carousel Styling */
 .text-testimonial-carousel {
     max-width: 900px;
     margin: 80px auto 0; /* More spacing from video carousel */
@@ -503,20 +499,6 @@ a:hover {
     display: flex; /* Only active item is shown */
 }
 
-.testimonial-text-item p {
-    font-size: 1.3em; /* Larger quote text */
-    font-style: italic;
-    color: var(--light-text);
-    margin-bottom: 20px;
-    line-height: 1.5;
-    max-width: 700px;
-}
-
-.testimonial-text-item h4 {
-    font-size: 1.2em;
-    color: var(--accent-color);
-    margin-bottom: 0;
-}
 
 .carousel-nav {
     position: absolute;
@@ -576,7 +558,6 @@ a:hover {
     border: none;
     outline: none;
     cursor: pointer;
-    font-size: 1.2em;
     font-weight: 500;
     display: flex;
     justify-content: space-between;
@@ -610,33 +591,17 @@ a:hover {
     color: var(--mid-text);
 }
 
-.accordion-content p {
-    padding: 20px 0;
-    margin-bottom: 0;
-    line-height: 1.7;
-}
-
 
 /* Contact Section */
 .contact-section {
     text-align: center;
 }
 
-.contact-intro {
-    font-size: 1.2em;
-    max-width: 700px;
-    margin: 0 auto 40px;
-}
 
 .contact-info {
     margin-bottom: 50px;
 }
 
-.contact-info p {
-    font-size: 1.1em;
-    margin-bottom: 10px;
-    color: var(--light-text);
-}
 
 .contact-info a {
     color: var(--border-color);
@@ -657,13 +622,6 @@ a:hover {
     text-align: left;
 }
 
-.form-group label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 500;
-    color: var(--light-text);
-    font-size: 1.1em;
-}
 
 .form-group input,
 .form-group textarea {
@@ -688,6 +646,62 @@ a:hover {
     width: auto;
     padding: 15px 40px;
     font-size: 1.1em;
+}
+
+/* Footer */
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-col {
+    text-align: left;
+}
+
+.footer-col .footer-logo {
+    height: 45px; /* Reduced from 70px */
+    margin-bottom: 15px;
+}
+
+.footer-col ul {
+    list-style: none;
+}
+
+.footer-col ul li {
+    margin-bottom: 10px;
+}
+
+.footer-col ul li a {
+    color: var(--mid-text);
+    transition: color 0.3s ease;
+}
+
+.footer-col ul li a:hover {
+    color: var(--border-color);
+}
+
+.social-links a {
+    font-size: 1.5em;
+    margin-right: 15px;
+    color: var(--mid-text);
+    transition: color 0.3s ease;
+}
+
+.social-links a:hover {
+    color: var(--border-color);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid rgba(0, 229, 255, 0.1);
+}
+
+.footer-bottom p {
+    margin: 0;
+    color: var(--mid-text);
 }
 
 /* WhatsApp Button */
@@ -720,11 +734,11 @@ a:hover {
 /* Responsive Design */
 @media (max-width: 992px) {
     h1 {
-        font-size: 2.8em;
+        font-size: 2.4em; /* Further reduced for smaller screens */
     }
 
     h2 {
-        font-size: 2.2em;
+        font-size: 1.8em; /* Further reduced */
         margin-bottom: 40px;
     }
 
@@ -733,7 +747,7 @@ a:hover {
     }
 
     .logo img {
-        height: 70px; /* Adjust for smaller screens */
+        height: 60px; /* Adjust for smaller screens */
     }
 
     .nav-list {
@@ -767,28 +781,28 @@ a:hover {
     }
 
     .whatsapp-button {
-        right: 80px; /* Adjust for smaller screens */
-        width: 55px;
-        height: 55px;
+        right: 70px; /* Adjust for smaller screens */
+        width: 50px;
+        height: 50px;
     }
 
     .whatsapp-button img {
-        width: 32px;
-        height: 32px;
+        width: 28px;
+        height: 28px;
     }
 }
 
 @media (max-width: 768px) {
     h1 {
-        font-size: 2.2em;
+        font-size: 2em;
     }
 
     h2 {
-        font-size: 1.8em;
+        font-size: 1.6em;
     }
 
     .hero p {
-        font-size: 1.1em;
+        font-size: 1em;
     }
 
     .service-grid, .why-us-grid, .process-grid {
@@ -802,10 +816,10 @@ a:hover {
     }
 
     .testimonial-text-item p {
-        font-size: 1.1em;
+        font-size: 1em;
     }
     .testimonial-text-item h4 {
-        font-size: 1em;
+        font-size: 0.9em;
     }
     .carousel-nav button {
         font-size: 2em;
@@ -816,7 +830,7 @@ a:hover {
     }
 
     .accordion-header {
-        font-size: 1.1em;
+        font-size: 1em;
         padding: 15px 20px;
     }
 
@@ -825,37 +839,37 @@ a:hover {
     }
 
     .whatsapp-button {
-        right: 70px; /* Further adjustment for even smaller screens */
-        width: 50px;
-        height: 50px;
+        right: 60px; /* Further adjustment for even smaller screens */
+        width: 45px;
+        height: 45px;
     }
 
     .whatsapp-button img {
-        width: 28px;
-        height: 28px;
+        width: 25px;
+        height: 25px;
     }
 }
 
 @media (max-width: 480px) {
     h1 {
-        font-size: 1.8em;
+        font-size: 1.6em;
     }
 
     h2 {
-        font-size: 1.5em;
+        font-size: 1.4em;
     }
 
     .hero p {
-        font-size: 1em;
+        font-size: 0.95em;
     }
 
     .btn {
-        padding: 12px 25px;
-        font-size: 0.9em;
+        padding: 10px 20px;
+        font-size: 0.85em;
     }
 
     .logo img {
-        height: 60px; /* Smallest size for very small screens */
+        height: 50px; /* Smallest size for very small screens */
     }
 
     .service-item, .why-us-item, .process-step, .faq-accordion, .contact-form {
@@ -873,28 +887,18 @@ a:hover {
     }
 
     .contact-info p {
-        font-size: 1em;
+        font-size: 0.9em;
     }
 
     .whatsapp-button {
-        width: 45px;
-        height: 45px;
+        width: 40px;
+        height: 40px;
         bottom: 20px;
-        right: 60px; /* Final adjustment for small phone screens */
+        right: 50px; /* Final adjustment for small phone screens */
     }
 
     .whatsapp-button img {
-        width: 25px;
-        height: 25px;
-    }
-
-    .testimonial-text-item p {
-        font-size: 1em;
-    }
-    .testimonial-text-item h4 {
-        font-size: 0.9em;
-    }
-    .carousel-nav button {
-        font-size: 1.8em;
+        width: 22px;
+        height: 22px;
     }
 }
