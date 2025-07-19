@@ -756,9 +756,20 @@ a:hover {
     margin-bottom: 20px;
 }
 
+/* Styling for the Expert Names within the Expert Cards */
+.expert-card h4 {
+    color: var(--light-text); /* Slightly lighter color for names */
+    font-size: 1.25em; /* A bit larger than regular text, smaller than role title */
+    margin-top: 10px; /* Space above the name */
+    margin-bottom: 5px; /* Space below the name, before the role title */
+    font-weight: 600; /* Make the name slightly bolder */
+}
+
+/* Adjust the h3 within expert card to position correctly after h4 */
 .expert-card h3 {
-    color: var(--border-color);
-    margin-bottom: 10px;
+    font-size: 1.35em; /* Adjust to fit visually */
+    margin-bottom: 15px; /* Add space below the role title */
+    color: var(--border-color); /* Retain its distinct color */
 }
 
 .expert-card p {
@@ -1043,12 +1054,12 @@ a:hover {
 
     .whatsapp-button {
         right: 60px; /* Further adjustment for even smaller screens */
-        width: 45px;
-        height: 45px;
+        width: 50px; /* Adjusted to be 50px */
+        height: 50px; /* Adjusted to be 50px */
     }
 
     .whatsapp-button i { /* Adjust icon size for smaller button */
-        font-size: 25px;
+        font-size: 28px; /* Adjusted to be 28px */
     }
 
     .security-trust-section .security-feature h3 i {
@@ -1098,13 +1109,13 @@ a:hover {
     }
 
     .whatsapp-button {
-        width: 40px;
-        height: 40px;
+        width: 45px; /* Adjusted to be 45px */
+        height: 45px; /* Adjusted to be 45px */
         bottom: 20px;
         right: 50px; /* Final adjustment for small phone screens */
     }
 
     .whatsapp-button i { /* Adjust icon size for smaller button */
-        font-size: 22px;
+        font-size: 25px; /* Adjusted to be 25px */
     }
 }
