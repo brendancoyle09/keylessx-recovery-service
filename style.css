@@ -134,7 +134,8 @@ a:hover {
 }
 
 .logo img {
-    height: 60px; /* Adjust as needed */
+    /* Adjusted logo size */
+    height: 80px; /* Increased from 60px */
     width: auto;
 }
 
@@ -577,7 +578,7 @@ a:hover {
 .contact-intro {
     font-size: 1.2em;
     max-width: 700px;
-    margin: 0 auto 40px;
+    margin: 0 auto && 40px;
 }
 
 .contact-info {
@@ -707,11 +708,16 @@ a:hover {
     border-top: 1px solid rgba(0, 229, 255, 0.1);
 }
 
+.footer-bottom p {
+    margin: 0;
+    color: var(--mid-text);
+}
+
 /* WhatsApp Button */
 .whatsapp-button {
     position: fixed;
     bottom: 25px;
-    right: 25px;
+    right: 90px; /* Moved to the left from default to avoid Tawk.to overlap */
     background-color: var(--whatsapp-green);
     border-radius: 50%;
     width: 60px;
@@ -749,6 +755,10 @@ a:hover {
         padding: 80px 0;
     }
 
+    .logo img {
+        height: 70px; /* Adjust for smaller screens */
+    }
+
     .nav-list {
         display: none; /* Hide navigation by default on smaller screens */
     }
@@ -777,6 +787,17 @@ a:hover {
 
     .footer-col {
         align-items: center;
+    }
+
+    .whatsapp-button {
+        right: 80px; /* Adjust for smaller screens */
+        width: 55px;
+        height: 55px;
+    }
+
+    .whatsapp-button img {
+        width: 32px;
+        height: 32px;
     }
 }
 
@@ -825,6 +846,17 @@ a:hover {
     .accordion-content p {
         padding: 15px 0;
     }
+
+    .whatsapp-button {
+        right: 70px; /* Further adjustment for even smaller screens */
+        width: 50px;
+        height: 50px;
+    }
+
+    .whatsapp-button img {
+        width: 28px;
+        height: 28px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -846,7 +878,7 @@ a:hover {
     }
 
     .logo img {
-        height: 50px;
+        height: 60px; /* Smallest size for very small screens */
     }
 
     .service-item, .why-us-item, .process-step, .faq-accordion, .contact-form {
@@ -868,15 +900,15 @@ a:hover {
     }
 
     .whatsapp-button {
-        width: 50px;
-        height: 50px;
+        width: 45px;
+        height: 45px;
         bottom: 20px;
-        right: 20px;
+        right: 60px; /* Final adjustment for small phone screens */
     }
 
     .whatsapp-button img {
-        width: 30px;
-        height: 30px;
+        width: 25px;
+        height: 25px;
     }
 
     .testimonial-text-item p {
