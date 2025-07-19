@@ -4,18 +4,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const nav = document.querySelector('.nav');
     const navList = document.querySelector('.nav-list');
 
-    hamburger.addEventListener('click', () => {
-        nav.classList.toggle('active');
-        hamburger.classList.toggle('active'); // Optional: for animating the hamburger icon
-    });
+    if (hamburger && nav && navList) { // Ensure elements exist
+        hamburger.addEventListener('click', () => {
+            nav.classList.toggle('active');
+            hamburger.classList.toggle('active'); // Optional: for animating the hamburger icon
+        });
 
-    // Close mobile nav when a link is clicked
-    navList.addEventListener('click', (e) => {
-        if (e.target.tagName === 'A') {
-            nav.classList.remove('active');
-            hamburger.classList.remove('active');
-        }
-    });
+        // Close mobile nav when a link is clicked
+        navList.addEventListener('click', (e) => {
+            if (e.target.tagName === 'A') {
+                nav.classList.remove('active');
+                hamburger.classList.remove('active');
+            }
+        });
+    }
+
 
     // Smooth scrolling for navigation links
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -34,27 +37,43 @@ document.addEventListener('DOMContentLoaded', () => {
     // Video lazy loading
     const videoItems = document.querySelectorAll('.testimonial-item video');
 
-    const videoObserver = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const video = entry.target;
-                const source = video.querySelector('source');
-                if (source && source.dataset.src) {
-                    source.src = source.dataset.src;
-                    video.load(); // Load the video
+    if ('IntersectionObserver' in window) { // Check for IntersectionObserver support
+        const videoObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const video = entry.target;
+                    const source = video.querySelector('source');
+                    if (source && source.dataset.src) {
+                        source.src = source.dataset.src;
+                        video.load(); // Load the video
+                    } else if (video.dataset.src) { // Fallback for video without source tag
+                        video.src = video.dataset.src;
+                        video.load();
+                    }
+                    observer.unobserve(video); // Stop observing once loaded
                 }
-                video.src = video.dataset.src; // For videos without source tags
-                observer.unobserve(video); // Stop observing once loaded
-            }
+            });
+        }, {
+            rootMargin: '0px 0px 200px 0px', // Load 200px before reaching viewport
+            threshold: 0
         });
-    }, {
-        rootMargin: '0px 0px 200px 0px', // Load 200px before reaching viewport
-        threshold: 0
-    });
 
-    videoItems.forEach(video => {
-        videoObserver.observe(video);
-    });
+        videoItems.forEach(video => {
+            videoObserver.observe(video);
+        });
+    } else {
+        // Fallback for browsers that don't support Intersection Observer
+        videoItems.forEach(video => {
+            const source = video.querySelector('source');
+            if (source && source.dataset.src) {
+                source.src = source.dataset.src;
+            } else if (video.dataset.src) {
+                video.src = video.dataset.src;
+            }
+            video.load();
+        });
+    }
+
 
     // FAQ Accordion functionality
     const accordionHeaders = document.querySelectorAll('.accordion-header');
@@ -68,17 +87,19 @@ document.addEventListener('DOMContentLoaded', () => {
             if (currentActive && currentActive !== header) {
                 currentActive.classList.remove('active');
                 currentActive.nextElementSibling.style.maxHeight = null;
-                currentActive.nextElementSibling.style.padding = '0 30px';
+                currentActive.nextElementSibling.style.padding = '0 30px'; // Reset padding
             }
 
             // Toggle the clicked accordion
             header.classList.toggle('active');
             if (currentContent.style.maxHeight) {
                 currentContent.style.maxHeight = null;
-                currentContent.style.padding = '0 30px';
+                currentContent.style.padding = '0 30px'; // Reset padding
             } else {
-                currentContent.style.maxHeight = currentContent.scrollHeight + 40 + 'px'; // +40 for top/bottom padding
-                currentContent.style.padding = '20px 30px';
+                // Set max-height to scrollHeight to open the accordion
+                // Add padding height to scrollHeight for accurate expansion
+                currentContent.style.maxHeight = currentContent.scrollHeight + 40 + 'px'; // 20px top + 20px bottom padding
+                currentContent.style.padding = '20px 30px'; // Apply padding when open
             }
         });
     });
@@ -116,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Event Listeners for manual navigation
-    if (prevButton && nextButton) { // Check if buttons exist before adding listeners
+    if (prevButton && nextButton && testimonialItems.length > 1) { // Check if buttons and multiple testimonials exist
         prevButton.addEventListener('click', () => {
             clearInterval(testimonialInterval); // Stop auto-play on manual navigation
             prevTestimonial();
@@ -133,7 +154,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize carousel: show the first testimonial and start auto-play
     if (testimonialItems.length > 0) { // Check if testimonials exist before initializing
         showTestimonial(currentTestimonialIndex);
-        startAutoPlay();
+        if (testimonialItems.length > 1) { // Only auto-play if there's more than one testimonial
+            startAutoPlay();
+        }
     }
 
 }); // End of DOMContentLoaded
