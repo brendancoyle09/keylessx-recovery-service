@@ -33,46 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Video lazy loading
-    const videoItems = document.querySelectorAll('.testimonial-item video');
-
-    if ('IntersectionObserver' in window) { // Check for IntersectionObserver support
-        const videoObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const video = entry.target;
-                    const source = video.querySelector('source');
-                    if (source && source.dataset.src) {
-                        source.src = source.dataset.src;
-                        video.load(); // Load the video
-                    } else if (video.dataset.src) { // Fallback for video without source tag
-                        video.src = video.dataset.src;
-                        video.load();
-                    }
-                    observer.unobserve(video); // Stop observing once loaded
-                }
-            });
-        }, {
-            rootMargin: '0px 0px 200px 0px', // Load 200px before reaching viewport
-            threshold: 0
-        });
-
-        videoItems.forEach(video => {
-            videoObserver.observe(video);
-        });
-    } else {
-        // Fallback for browsers that don't support Intersection Observer
-        videoItems.forEach(video => {
-            const source = video.querySelector('source');
-            if (source && source.dataset.src) {
-                source.src = source.dataset.src;
-            } else if (video.dataset.src) {
-                video.src = video.dataset.src;
-            }
-            video.load();
-        });
-    }
-
     // FAQ Accordion functionality
     const accordionHeaders = document.querySelectorAll('.accordion-header');
 
@@ -85,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (currentActive && currentActive !== header) {
                 currentActive.classList.remove('active');
                 currentActive.nextElementSibling.style.maxHeight = null;
-                currentActive.nextElementSibling.style.padding = '0 30px'; // Reset padding
+                currentActive.nextActive.nextElementSibling.style.padding = '0 30px'; // Reset padding
             }
 
             // Toggle the clicked accordion
