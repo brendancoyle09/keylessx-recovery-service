@@ -25,7 +25,7 @@ body {
     font-family: 'Roboto', sans-serif;
     line-height: 1.6;
     color: var(--light-text);
-    background-color: var(--primary-bg);
+    background-color: var(--primary-bg); /* Base background for the whole page */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -38,13 +38,12 @@ body {
 
 section {
     padding: 100px 0;
-    background-color: var(--secondary-bg);
-    margin-bottom: 20px;
+    margin-bottom: 20px; /* Space between sections */
+    background-color: transparent; /* Ensures gradients applied directly to sections are visible */
 }
 
-section:nth-of-type(even) {
-    background-color: var(--primary-bg); /* Alternate section background */
-}
+/* REMOVED: section:nth-of-type(even) as backgrounds are now specific to each section ID */
+
 
 h1, h2, h3, h4 {
     font-family: 'Montserrat', sans-serif;
@@ -135,7 +134,7 @@ a:hover {
 
 .logo img {
     /* Adjusted logo size */
-    height: 80px; /* Increased from 60px */
+    height: 80px;
     width: auto;
 }
 
@@ -228,7 +227,7 @@ a:hover {
     color: var(--light-text);
     text-align: center;
     padding: 180px 20px 100px;
-    min-height: 100vh; /* Changed to full viewport height */
+    min-height: 100vh; /* Full viewport height */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -240,7 +239,55 @@ a:hover {
     margin: 20px auto 40px;
 }
 
+/* --- Section Backgrounds (Dull & Static fix) --- */
+/* Services Section */
+#services {
+    background: linear-gradient(135deg, var(--secondary-bg), #131d34); /* Subtle dark blue gradient */
+}
+
 /* About Us Section */
+#about {
+    background: linear-gradient(45deg, var(--primary-bg), #111a2a); /* Subtle darker blue gradient */
+}
+
+/* Why Us Section */
+#why-us {
+    background: linear-gradient(135deg, #131d34, var(--secondary-bg)); /* Another subtle dark blue gradient */
+}
+
+/* Process Section */
+#process {
+    background: linear-gradient(45deg, #111a2a, var(--primary-bg)); /* Another subtle darker blue gradient */
+}
+
+/* Testimonials Section */
+#testimonials {
+    background: linear-gradient(135deg, var(--secondary-bg), #131d34); /* Repeated gradient for alternation */
+}
+
+/* FAQ Section */
+#faq {
+    background: linear-gradient(45deg, var(--primary-bg), #111a2a); /* Repeated gradient for alternation */
+}
+
+/* Contact Section */
+#contact {
+    background: linear-gradient(135deg, #131d34, var(--secondary-bg)); /* Repeated gradient for alternation */
+}
+
+/* Footer Section */
+.footer {
+    background: linear-gradient(to top, var(--card-bg), #0a2d55); /* Deeper blue gradient for the footer */
+    padding: 60px 0 20px;
+    border-top: 1px solid var(--border-color);
+    color: var(--mid-text);
+    font-size: 0.95em;
+}
+
+/* --- End Section Backgrounds --- */
+
+
+/* About Us Section (Specific content styles) */
 .about-us .about-content {
     max-width: 900px;
     margin: 0 auto;
@@ -248,7 +295,7 @@ a:hover {
     font-size: 1.1em;
 }
 
-/* Services Section */
+/* Services Section (Specific content styles) */
 .services-section {
     text-align: center;
 }
@@ -422,7 +469,7 @@ a:hover {
     margin: 80px auto 0; /* More spacing from video carousel */
     position: relative;
     overflow: hidden;
-    background-color: var(--card-bg);
+    background-color: var(--card-bg); /* Card background for the inner carousel */
     padding: 40px;
     border-radius: 10px;
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
@@ -643,81 +690,11 @@ a:hover {
     font-size: 1.1em;
 }
 
-/* Footer */
-.footer {
-    background-color: var(--card-bg);
-    padding: 60px 0 20px;
-    border-top: 1px solid var(--border-color);
-    color: var(--mid-text);
-    font-size: 0.95em;
-}
-
-.footer-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 40px;
-    margin-bottom: 40px;
-}
-
-.footer-col {
-    text-align: left;
-}
-
-.footer-col .footer-logo {
-    height: 70px;
-    margin-bottom: 15px;
-}
-
-.footer-col h3 {
-    color: var(--light-text);
-    margin-bottom: 20px;
-    font-size: 1.4em;
-}
-
-.footer-col ul {
-    list-style: none;
-}
-
-.footer-col ul li {
-    margin-bottom: 10px;
-}
-
-.footer-col ul li a {
-    color: var(--mid-text);
-    transition: color 0.3s ease;
-}
-
-.footer-col ul li a:hover {
-    color: var(--border-color);
-}
-
-.social-links a {
-    font-size: 1.5em;
-    margin-right: 15px;
-    color: var(--mid-text);
-    transition: color 0.3s ease;
-}
-
-.social-links a:hover {
-    color: var(--border-color);
-}
-
-.footer-bottom {
-    text-align: center;
-    padding-top: 20px;
-    border-top: 1px solid rgba(0, 229, 255, 0.1);
-}
-
-.footer-bottom p {
-    margin: 0;
-    color: var(--mid-text);
-}
-
 /* WhatsApp Button */
 .whatsapp-button {
     position: fixed;
     bottom: 25px;
-    right: 90px; /* Moved to the left from default to avoid Tawk.to overlap */
+    right: 90px;
     background-color: var(--whatsapp-green);
     border-radius: 50%;
     width: 60px;
