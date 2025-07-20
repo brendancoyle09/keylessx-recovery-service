@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (currentActive && currentActive !== header) {
                 currentActive.classList.remove('active');
                 currentActive.nextElementSibling.style.maxHeight = null;
-                currentActive.nextActive.nextElementSibling.style.padding = '0 30px'; // Reset padding
+                currentActive.nextElementSibling.style.padding = '0 30px'; // Reset padding
             }
 
             // Toggle the clicked accordion
@@ -138,13 +138,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // NEW: Initial Assessment Form Submission (and basic validation)
+    // Initial Assessment Form Submission (with client-side validation)
     const assessmentForm = document.querySelector('.assessment-form');
     if (assessmentForm) {
-        assessmentForm.addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent default form submission
+        assessmentForm.addEventListener('submit', async function(event) {
+            // Prevent default form submission so JavaScript can handle client-side validation first
+            event.preventDefault();
 
-            // Basic client-side validation example
+            // Basic client-side validation
             const fullName = document.getElementById('fullName').value;
             const email = document.getElementById('email').value;
             const cryptoType = document.getElementById('cryptoType').value;
@@ -153,27 +154,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (!fullName || !email || !cryptoType || !lossScenario || !lossDetails) {
                 alert('Please fill in all required fields marked with an asterisk (*).');
-                return;
+                return; // Stop function if validation fails
             }
 
             if (!/\S+@\S+\.\S+/.test(email)) {
                 alert('Please enter a valid email address.');
-                return;
+                return; // Stop function if email validation fails
             }
 
-            // In a real application, you would send this data to a server here (e.g., using fetch API)
-            console.log('Form Submitted!', {
-                fullName,
-                email,
-                cryptoType,
-                lossScenario,
-                lossDetails,
-                contactNumber: document.getElementById('contactNumber').value,
-                lastAccessed: document.getElementById('lastAccessed').value
-            });
+            // If client-side validation passes, manually submit the form to Formspree
+            // This bypasses the default browser submission and allows us to control the alert/reset
+            const form = event.target;
+            const formData = new FormData(form);
 
-            alert('Your assessment request has been submitted successfully! We will contact you soon.');
-            assessmentForm.reset(); // Clear the form
+            try {
+                const response = await fetch(form.action, {
+                    method: form.method,
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json' // Crucial for Formspree to return JSON and not redirect
+                    }
+                });
+
+                if (response.ok) {
+                    alert('Your assessment request has been submitted successfully! We will contact you soon.');
+                    form.reset(); // Clear the form fields
+                } else {
+                    // Handle non-OK responses from Formspree (e.g., rate limits, errors)
+                    const errorData = await response.json();
+                    console.error('Formspree submission error:', errorData);
+                    alert('There was an error submitting your form. Please try again or contact us directly.');
+                }
+            } catch (error) {
+                console.error('Network or submission error:', error);
+                alert('There was a problem connecting to the server. Please check your internet connection and try again.');
+            }
         });
     }
 
