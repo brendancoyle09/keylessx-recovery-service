@@ -23,12 +23,21 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             // Check if the target is on the current page (starts with '#')
-            // If it's a link to blog.html or another full page, let the default behavior happen
             if (this.getAttribute('href').startsWith('#')) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                // Only scroll if the element exists
+                if (targetElement) {
+                    const headerHeight = document.querySelector('.header').offsetHeight;
+                    const targetPosition = targetElement.offsetTop - headerHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
             }
         });
     });
@@ -38,26 +47,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
     accordionHeaders.forEach(header => {
         header.addEventListener('click', () => {
-            const currentContent = header.nextElementSibling;
-            const currentActive = document.querySelector('.accordion-header.active');
+            const accordionItem = header.parentElement;
+            const accordionContent = accordionItem.querySelector('.accordion-content');
+            const isActive = accordionItem.classList.contains('active');
 
-            // Close other open accordions if they are not the current one
-            if (currentActive && currentActive !== header) {
-                currentActive.classList.remove('active');
-                currentActive.nextElementSibling.style.maxHeight = null;
-                currentActive.nextElementSibling.style.padding = '0 30px'; // Reset padding
-            }
+            // Close all other accordions
+            document.querySelectorAll('.accordion-item.active').forEach(item => {
+                if (item !== accordionItem) {
+                    item.classList.remove('active');
+                    item.querySelector('.accordion-header').classList.remove('active');
+                    item.querySelector('.accordion-content').style.maxHeight = '0';
+                    item.querySelector('.accordion-content').style.padding = '0';
+                }
+            });
 
-            // Toggle the clicked accordion
+            // Toggle the clicked one
+            accordionItem.classList.toggle('active');
             header.classList.toggle('active');
-            if (currentContent.style.maxHeight) {
-                currentContent.style.maxHeight = null;
-                currentContent.style.padding = '0 30px'; // Reset padding
+
+            if (isActive) {
+                accordionContent.style.maxHeight = '0';
+                accordionContent.style.padding = '0 30px';
             } else {
-                // Set max-height to scrollHeight to open the accordion
-                // Add padding height to scrollHeight for accurate expansion
-                currentContent.style.maxHeight = currentContent.scrollHeight + 40 + 'px'; // 20px top + 20px bottom padding
-                currentContent.style.padding = '20px 30px'; // Apply padding when open
+                // Set max-height based on scrollHeight + padding
+                accordionContent.style.maxHeight = accordionContent.scrollHeight + 40 + 'px'; // 20px top + 20px bottom padding
+                accordionContent.style.padding = '20px 30px'; // Apply padding when open
             }
         });
     });
@@ -94,4 +108,79 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Scroll-to-top button functionality
+    const scrollToTopBtn = document.getElementById('scroll-to-top');
+
+    if (scrollToTopBtn) {
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollToTopBtn.style.display = 'block';
+            } else {
+                scrollToTopBtn.style.display = 'none';
+            }
+        });
+
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
+
+    // New code to handle form submission and message box
+    const contactForm = document.getElementById('contactForm');
+    const formMessage = document.getElementById('form-message');
+
+    // Function to show a message in the custom box
+    function showFormMessage(message, isSuccess) {
+        formMessage.textContent = message;
+        formMessage.classList.remove('success', 'error');
+        formMessage.classList.add(isSuccess ? 'success' : 'error', 'show');
+
+        // Automatically hide the message after 5 seconds
+        setTimeout(() => {
+            formMessage.classList.remove('show');
+            formMessage.textContent = ''; // Clear message after hiding
+        }, 5000);
+    }
+    
+    if (contactForm) {
+        contactForm.addEventListener('submit', async function(event) {
+            // Prevent the default form submission
+            event.preventDefault();
+
+            // Perform client-side validation if needed
+            if (!contactForm.checkValidity()) {
+                showFormMessage('Please fill out all required fields correctly.', false);
+                return;
+            }
+
+            const form = event.target;
+            const formData = new FormData(form);
+
+            try {
+                // Use fetch to submit the form data to Formspree
+                const response = await fetch(form.action, {
+                    method: form.method,
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json' // Crucial for Formspree to return JSON
+                    }
+                });
+
+                if (response.ok) {
+                    showFormMessage('Your assessment request has been submitted successfully! We will contact you soon.', true);
+                    form.reset(); // Clear the form fields
+                } else {
+                    const errorData = await response.json();
+                    console.error('Formspree submission error:', errorData);
+                    showFormMessage('There was an error submitting your form. Please try again or contact us directly.', false);
+                }
+            } catch (error) {
+                console.error('Network or submission error:', error);
+                showFormMessage('There was a problem connecting to the server. Please check your internet connection and try again.', false);
+            }
+        });
+    }
 });
